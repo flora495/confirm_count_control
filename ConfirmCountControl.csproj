@@ -47,9 +47,27 @@
 			<SpecificVersion>False</SpecificVersion>
 			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Jump King\MonoGame.Framework.dll</HintPath>
 		</Reference>
+		<Reference Include="LanguageJK">
+			<Private>False</Private>
+			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Jump King\LanguageJK.dll</HintPath>
+		</Reference>
+		<Reference Include="0Harmony">
+			<Private>False</Private>
+			<HintPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\1061090\3644423150\0Harmony.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="ModEntry.cs" />
+		<Compile Include="Settings.cs" />
+		<Compile Include="ConfirmCountOption.cs" />
+		<Compile Include="InstantConfirmSelector.cs" />
+		<Compile Include="MenuFactoryPatches.cs" />
+		<Compile Include="EnabledToggle.cs" />
 
 		<Compile Include="Properties\AssemblyInfo.cs" />
 	</ItemGroup>

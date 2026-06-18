@@ -1,47 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Reflection;
+using HarmonyLib;
 using JumpKing.Mods;
+using JumpKing.PauseMenu;
 
 namespace ConfirmCountControl
 {
     [JumpKingMod("F.ConfirmCountControl")]
     public static class ModEntry
-	{
+    {
+        private const string SettingsFileName = "F.ConfirmCountControl.Settings.xml";
+
+        private static string SettingsPath { get; set; }
+
+        public static Settings Settings { get; private set; }
+
         /// <summary>
         /// Called by Jump King before the level loads
         /// </summary>
         [BeforeLevelLoad]
         public static void BeforeLevelLoad()
         {
-            // Your code here
+            SettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SettingsFileName);
+            Settings = Settings.Load(SettingsPath);
+            MenuFactoryPatches.Apply(new Harmony("F.ConfirmCountControl.Harmony"));
         }
 
-        /// <summary>
-        /// Called by Jump King when the level unloads
-        /// </summary>
-        [OnLevelUnload]
-        public static void OnLevelUnload()
+        public static void SaveSettings()
         {
-            // Your code here
+            Settings.Save(SettingsPath);
         }
 
-        /// <summary>
-        /// Called by Jump King when the Level Starts
-        /// </summary>
-        [OnLevelStart]
-        public static void OnLevelStart()
+        [PauseMenuItemSetting]
+        public static EnabledToggle PauseEnabledSetting(object factory, GuiFormat format)
         {
-            // Your code here
+            return new EnabledToggle();
         }
 
-        /// <summary>
-        /// Called by Jump King when the Level Ends
-        /// </summary>
-        [OnLevelEnd]
-        public static void OnLevelEnd()
+        [MainMenuItemSetting]
+        public static EnabledToggle MainEnabledSetting(object factory, GuiFormat format)
         {
-            // Your code here
+            return new EnabledToggle();
+        }
+
+        [PauseMenuItemSetting]
+        public static ConfirmCountOption PauseSaveExitConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Save & Exit", Settings.SaveExitConfirmCount, v => Settings.SaveExitConfirmCount = v);
+        }
+
+        [PauseMenuItemSetting]
+        public static ConfirmCountOption PauseRestartConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Restart", Settings.RestartConfirmCount, v => Settings.RestartConfirmCount = v);
+        }
+
+        [PauseMenuItemSetting]
+        public static ConfirmCountOption PauseGiveUpConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Give Up", Settings.GiveUpConfirmCount, v => Settings.GiveUpConfirmCount = v);
+        }
+
+        [MainMenuItemSetting]
+        public static ConfirmCountOption MainSaveExitConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Save & Exit", Settings.SaveExitConfirmCount, v => Settings.SaveExitConfirmCount = v);
+        }
+
+        [MainMenuItemSetting]
+        public static ConfirmCountOption MainRestartConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Restart", Settings.RestartConfirmCount, v => Settings.RestartConfirmCount = v);
+        }
+
+        [MainMenuItemSetting]
+        public static ConfirmCountOption MainGiveUpConfirmCountSetting(object factory, GuiFormat format)
+        {
+            return new ConfirmCountOption("Give Up", Settings.GiveUpConfirmCount, v => Settings.GiveUpConfirmCount = v);
         }
     }
 }
