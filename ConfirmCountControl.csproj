@@ -52,8 +52,8 @@
 			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Jump King\LanguageJK.dll</HintPath>
 		</Reference>
 		<Reference Include="0Harmony">
-			<Private>False</Private>
-			<HintPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\1061090\3644423150\0Harmony.dll</HintPath>
+			<Private>True</Private>
+			<HintPath>lib\0Harmony.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
