@@ -31,34 +31,10 @@ namespace ConfirmCountControl
             Settings.Save(SettingsPath);
         }
 
-        [PauseMenuItemSetting]
-        public static EnabledToggle PauseEnabledSetting(object factory, GuiFormat format)
-        {
-            return new EnabledToggle();
-        }
-
         [MainMenuItemSetting]
         public static EnabledToggle MainEnabledSetting(object factory, GuiFormat format)
         {
             return new EnabledToggle();
-        }
-
-        [PauseMenuItemSetting]
-        public static ConfirmCountOption PauseSaveExitConfirmCountSetting(object factory, GuiFormat format)
-        {
-            return new ConfirmCountOption("Save & Exit", Settings.SaveExitConfirmCount, v => Settings.SaveExitConfirmCount = v);
-        }
-
-        [PauseMenuItemSetting]
-        public static ConfirmCountOption PauseRestartConfirmCountSetting(object factory, GuiFormat format)
-        {
-            return new ConfirmCountOption("Restart", Settings.RestartConfirmCount, v => Settings.RestartConfirmCount = v);
-        }
-
-        [PauseMenuItemSetting]
-        public static ConfirmCountOption PauseGiveUpConfirmCountSetting(object factory, GuiFormat format)
-        {
-            return new ConfirmCountOption("Give Up", Settings.GiveUpConfirmCount, v => Settings.GiveUpConfirmCount = v);
         }
 
         [MainMenuItemSetting]
